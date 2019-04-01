@@ -171,15 +171,34 @@ return array
 end
     
 def player_numbers(name)
+  array = []
   game_hash.each do |location, team|
     if team[:team_name] == name
       team.each do |key, value|
         if key == :players
         value.each do |player, stats|
-          return stats[:jerseys]
+          array << stats[:number]
           end
         end
       end
     end
   end
+  return array 
+end
+
+def player_stats(name)
+  game_hash.each do |location, team|
+    team.each do |key, value|
+      if key == :players
+        value.each do |player, stats|
+         if player == name 
+          return stats
+           end
+        end
+      end
+    end
+  end
+end
+
+def big_shoe_rebounds
 end
