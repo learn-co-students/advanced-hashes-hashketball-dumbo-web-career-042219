@@ -170,3 +170,16 @@ end
 return array
 end
     
+def player_numbers(name)
+  game_hash.each do |location, team|
+    if team[:team_name] == name
+      team.each do |key, value|
+        if key == :players
+        value.each do |player, stats|
+          return stats[:jerseys]
+          end
+        end
+      end
+    end
+  end
+end
