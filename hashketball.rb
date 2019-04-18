@@ -31,7 +31,7 @@ def game_hash
         number: 11,
         shoe:17,
         points:17,
-        rebounds:1219,
+        rebounds:19,
         assists:10,
         steals:3,
         blocks:1,
@@ -62,7 +62,7 @@ def game_hash
   :away =>
   {
     team_name: "Charlotte Hornets",
-    colors: [" Turquoise", "Purple"],
+    colors: ["Turquoise", "Purple"],
     players:
     {
       "Jeff Adrien" => {
@@ -120,6 +120,7 @@ def game_hash
   }
 end
 
+#----------------------------------------Good
 def num_points_scored(player) 
   game_hash.each do |location, details|
     details.each do |detail, value|
@@ -139,7 +140,7 @@ def num_points_scored(player)
     end
   end
 end
-
+#----------------------------------------Good
 def shoe_size(player)
   game_hash.each do |location, details|
     details.each do |detail, value|
@@ -147,7 +148,7 @@ def shoe_size(player)
         value.each do |person, data|
           # binding.pry
           if person == player
-           data.each do |id, stats|
+          data.each do |id, stats|
             if id == :shoe
             return stats
             # binding.pry
@@ -160,79 +161,72 @@ def shoe_size(player)
   end
 end
 
-# def team_colors(team)
-#   team = find_the_team(team)
-#   puts team
-#   #.fetch
-#   game_hash.each do |location, details|
-#     details.each do |detail, value|
-#       # binding.pry
-#       if detail == :team_name
-#         detail.keys
-      
-#       end
-#     end
-#   end
-  
-# end
-def team_colors(team)
-  names = []
-  game_hash.select do |location, details|
-    details.each do |detail, value|
-    if   detail == team
-        binding.pry
-        # if  key==:colors
-        names << details[:colors]
-        
-      end
-    end
-    
-  end
-    names
-    # binding.pry
-
+def find_the_team(team_name)
+  game_hash.values.find {|team| team.fetch(:team_name) == team_name}
+  # binding.pry
 end
 
-# def team_names
-#   names = []
-#   game_hash.each do |location, details|
-#     details.each do |detail, value|
+
+#----------------------------------------Good
+def team_colors(team)
+  team = find_the_team(team)
+  colors = team.fetch(:colors)
+  # binding.pry
+  colors
+end
+
+#----------------------------------------Good
+def team_names
+  game_hash.map do |location, data|
+    data[:team_name]
+  end
+  
+end
+
+#----------------------------------------Good
+def player_numbers(team)
+  find_the_team(team)[:players].map { |player_name, data| data[:number]}
+end
+  
+  
+#----------------------------------------Good
+def player_stats(player)
+  game_hash.each do |location, details|
+    details[:players].collect do |name, stats|
+      return stats if name == player
+    end
+  end
+end
+
+def big_shoe_rebounds
+  shoe_size = {}
+  game_hash.each do |location, details|
+    details[:players].collect do |name, stats|
+      shoe_size[stats[:shoe]] = stats[:rebounds]
+      # binding.pry
+    end
+  end
+  shoe_size[shoe_size.keys.max]
+  binding.pry
+end
+
+
+  
+  # game_hash.collect do |location, details|
+  #   details.each do |detail, value|
+  #     if detail == :team_name &&  details[detail.to_sym] == team_name
+  #           details[:players].each do |player|
+  #             # binding.pry  
+  #             player[1][:number] #player 0 is the key, player[1] accesses the nested hash
+  #           end
+            
+  #     end
+          
+  #   end
+  # end
+
       
-#       if detail == :team_name
-#         names << value
-#       end
-#     end
-#   end
-#     names
-#     # binding.pry
 
-# end
-
-
-# def player_numbers(team)
-#   answer = []
-#   game_hash.each do |location, details|
-#     details.each do |detail, value|
-#       if detail == :players
-#         value.each do |person, data|
-#           # if data== team
-#           data.each do |id, stats|
-#             if id == :number
-#             answer << stats
-#             # binding.pry
-#             end
-          
-#           end
-#           end
-          
-#         end
-        
-#       end
-#     end
-#     answer
-#   end
-# # answer
-# end
 
 #----------------------------------------Questions below
 #   game_hash[:home_team][:players].each do |current_player|
