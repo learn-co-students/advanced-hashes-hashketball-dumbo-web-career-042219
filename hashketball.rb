@@ -201,13 +201,11 @@ end
 def big_shoe_rebounds
   shoe_size = {}
   game_hash.each do |location, details|
-    details[:players].collect do |name, stats|
+    details[:players].each do |name, stats|
       shoe_size[stats[:shoe]] = stats[:rebounds]
-      # binding.pry
     end
   end
   shoe_size[shoe_size.keys.max]
-  binding.pry
 end
 
 
