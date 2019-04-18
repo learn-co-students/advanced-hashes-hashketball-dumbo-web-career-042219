@@ -160,54 +160,79 @@ def shoe_size(player)
   end
 end
 
-def team_colors(team)
-  game_hash.each do |location, details|
-    details.each do |detail, value|
-      # binding.pry
-      if detail == :team_name
-        detail.keys
+# def team_colors(team)
+#   team = find_the_team(team)
+#   puts team
+#   #.fetch
+#   game_hash.each do |location, details|
+#     details.each do |detail, value|
+#       # binding.pry
+#       if detail == :team_name
+#         detail.keys
       
-        
-      end
-    end
-  end
+#       end
+#     end
+#   end
   
-end
-
-def team_names
-  game_hash.each do |location, details|
+# end
+def team_colors(team)
+  names = []
+  game_hash.select do |location, details|
     details.each do |detail, value|
-      # binding.pry
-      if detail == :team_name
-        value
-      end
-    end
-  end
-
-def player_numbers(team)
-  answer = []
-  game_hash.each do |location, details|
-    details.each do |detail, value|
-      if detail == :players
-        value.each do |person, data|
-          # if data== team
-           data.each do |id, stats|
-            if id == :number
-            answer << stats
-            # binding.pry
-            end
-          
-          end
-          end
-          
-        end
+    if   detail == team
+        binding.pry
+        # if  key==:colors
+        names << details[:colors]
         
       end
     end
-    answer
+    
   end
-# answer
+    names
+    # binding.pry
+
 end
+
+# def team_names
+#   names = []
+#   game_hash.each do |location, details|
+#     details.each do |detail, value|
+      
+#       if detail == :team_name
+#         names << value
+#       end
+#     end
+#   end
+#     names
+#     # binding.pry
+
+# end
+
+
+# def player_numbers(team)
+#   answer = []
+#   game_hash.each do |location, details|
+#     details.each do |detail, value|
+#       if detail == :players
+#         value.each do |person, data|
+#           # if data== team
+#           data.each do |id, stats|
+#             if id == :number
+#             answer << stats
+#             # binding.pry
+#             end
+          
+#           end
+#           end
+          
+#         end
+        
+#       end
+#     end
+#     answer
+#   end
+# # answer
+# end
 
 #----------------------------------------Questions below
 #   game_hash[:home_team][:players].each do |current_player|

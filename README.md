@@ -1,4 +1,4 @@
-c# Hashketball
+# Hashketball
 
 ## Objectives
 
