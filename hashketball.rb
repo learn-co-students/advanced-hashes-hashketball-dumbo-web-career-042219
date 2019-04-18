@@ -190,14 +190,13 @@ def player_numbers(team)
     details.each do |detail, value|
       if detail == :players
         value.each do |person, data|
-          
           # if data== team
            data.each do |id, stats|
             if id == :number
             answer << stats
             # binding.pry
             end
-          end
+          
           end
           end
           
@@ -205,9 +204,9 @@ def player_numbers(team)
         
       end
     end
-    
+    answer
   end
-answer
+# answer
 end
 
 #----------------------------------------Questions below
