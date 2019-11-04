@@ -1,4 +1,4 @@
-# require 'pry'
+require 'pry'
 
 # Build game_hash method
 def game_hash
@@ -149,6 +149,27 @@ def num_points_scored(player_name)
 
 end
 
+
+
+def num_points_scored(player_name)
+  game_hash.each do |location, team_data|
+
+    team_data[:players].each do |player, player_stats|
+      binding.pry
+      if player == player_name
+        return player_stats[:points]
+      end
+    end
+  end
+end
+
+# def num_points_scored(name)
+#   player = find_the_player(name)
+#   player.fetch(:points)
+# end
+
+
+
 # * Build a method, `shoe_size`, that takes in an argument of a player's name and returns the shoe size for that player.
 def shoe_size(player_name)
 
@@ -240,3 +261,31 @@ end
 
   # Good references: difference between max and max_by
   # https://gist.github.com/jnst/2205a3ef4d92701a7bceef215b70e1cc
+
+  # helper methods:
+
+  def teams
+    game_hash.values
+  end
+
+  def players
+    game_hash[:home][:players].merge(game_hash[:away][:players])
+  end
+
+  def find_the_team(team_name)
+    teams.find {|team| team.fetch(:team_name) == team_name}
+  end
+
+  def find_the_player(name)
+    players.fetch(name)
+  end
+  # 1. Which player has the most points? Call the method `most_points_scored`.
+
+  def most_points_scored
+    players.max_by {|(k, v)| v[:points]}
+  end
+  # 2. Which team has the most points? Call the method `winning_team`.
+  #
+  # 3. Which player has the longest name? Call the method `player_with_longest_name`.
+  #
+  # 1. Write a method that returns true if the player with the longest name had the most steals. Call the method `long_name_steals_a_ton?`.
